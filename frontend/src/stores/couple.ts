@@ -35,8 +35,8 @@ export const useCoupleStore = defineStore('couple', {
       this.loading = true
       try {
         const res = await createInviteCodeApi()
-        // Backend returns { inviteCode: string }; API layer has { code: string }
-        this.inviteCode = (res as any).inviteCode ?? (res as any).code ?? null
+        // Backend returns { inviteCode: string }
+        this.inviteCode = (res as any).inviteCode ?? null
       } finally {
         this.loading = false
       }

@@ -2,7 +2,7 @@ import client from './client'
 import type { ApiResponse } from './client'
 
 export interface InviteResponse {
-  code: string
+  inviteCode: string
 }
 
 export interface CoupleInfoResponse {
@@ -27,7 +27,7 @@ export async function getInviteCode(): Promise<InviteResponse> {
 }
 
 export async function joinCouple(code: string): Promise<void> {
-  const response = await client.post<ApiResponse<null>>('/couple/join', { code })
+  const response = await client.post<ApiResponse<null>>('/couple/join', { inviteCode: code })
   // No data expected on success, but we don't throw — void return
   return
 }
