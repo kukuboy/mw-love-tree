@@ -26,10 +26,9 @@ export async function getInviteCode(): Promise<InviteResponse> {
   return response.data.data
 }
 
-export async function joinCouple(code: string): Promise<void> {
-  const response = await client.post<ApiResponse<null>>('/couple/join', { inviteCode: code })
-  // No data expected on success, but we don't throw — void return
-  return
+export async function joinCouple(code: string): Promise<string> {
+  const response = await client.post<ApiResponse<{ token: string }>>('/couple/join', { inviteCode: code })
+  return response.data.data.token
 }
 
 export async function getCoupleInfo(): Promise<CoupleInfoResponse> {

@@ -5,6 +5,7 @@ import {
   joinCouple as joinCoupleApi,
 } from '@/api/couple'
 import type { CoupleInfoResponse } from '@/types'
+import { useAuthStore } from '@/stores/auth'
 
 export const useCoupleStore = defineStore('couple', {
   state: () => ({
@@ -43,7 +44,13 @@ export const useCoupleStore = defineStore('couple', {
     },
 
     async joinCouple(code: string) {
-      await joinCoupleApi(code)
+      const newToken = await joinCoupleApi(code)
+
+      // Update the stored JWT with the fresh token that includes coupleId
+      const authStore = useAuthStore()
+      authStore.token = newToken
+      localStorage.setItem('token', newToken)
+
       // After successfully joining, refresh couple info to get the latest data
       await this.fetchCoupleInfo()
     },
