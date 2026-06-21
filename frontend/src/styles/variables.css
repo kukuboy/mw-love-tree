@@ -1,0 +1,13 @@
+:root {
+  --color-primary: #E8A0BF;
+  --color-secondary: #F3CCD5;
+  --color-accent: #C5898E;
+  --color-bg: #FFF5F7;
+  --color-text: #4A3B3C;
+  --color-gold: #D4A574;
+
+  --border-radius: 16px;
+  --shadow: 0 4px 24px rgba(232, 160, 191, 0.15);
+
+  --font-family: "PingFang SC", "Noto Serif SC", sans-serif;
+}
