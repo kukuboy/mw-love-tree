@@ -1,6 +1,7 @@
 package com.lovetree.service.impl;
 
 import com.lovetree.common.BusinessException;
+import com.lovetree.common.JwtUtil;
 import com.lovetree.dto.CoupleInfoResponse;
 import com.lovetree.entity.Couple;
 import com.lovetree.entity.Tree;
@@ -26,11 +27,13 @@ public class CoupleServiceImpl implements CoupleService {
     private final CoupleMapper coupleMapper;
     private final TreeMapper treeMapper;
     private final UserMapper userMapper;
+    private final JwtUtil jwtUtil;
 
-    public CoupleServiceImpl(CoupleMapper coupleMapper, TreeMapper treeMapper, UserMapper userMapper) {
+    public CoupleServiceImpl(CoupleMapper coupleMapper, TreeMapper treeMapper, UserMapper userMapper, JwtUtil jwtUtil) {
         this.coupleMapper = coupleMapper;
         this.treeMapper = treeMapper;
         this.userMapper = userMapper;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -64,7 +67,7 @@ public class CoupleServiceImpl implements CoupleService {
 
     @Override
     @Transactional
-    public void join(Long userId, String inviteCode) {
+    public String join(Long userId, String inviteCode) {
         // Find couple by invite code
         Couple couple = coupleMapper.findByInviteCode(inviteCode);
         if (couple == null) {
@@ -85,6 +88,9 @@ public class CoupleServiceImpl implements CoupleService {
         couple.setUser2Id(userId);
         couple.setAnniversary(LocalDate.now());
         coupleMapper.updateById(couple);
+
+        // Generate a fresh JWT that includes the coupleId
+        return jwtUtil.generateToken(userId, couple.getId());
     }
 
     @Override

@@ -9,6 +9,8 @@ import com.lovetree.service.CoupleService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/couple")
 public class CoupleController {
@@ -26,9 +28,9 @@ public class CoupleController {
     }
 
     @PostMapping("/join")
-    public ApiResponse<Void> join(CurrentUser currentUser, @Valid @RequestBody JoinRequest request) {
-        coupleService.join(currentUser.getUserId(), request.getInviteCode());
-        return ApiResponse.success(null);
+    public ApiResponse<Map<String, String>> join(CurrentUser currentUser, @Valid @RequestBody JoinRequest request) {
+        String newToken = coupleService.join(currentUser.getUserId(), request.getInviteCode());
+        return ApiResponse.success(Map.of("token", newToken));
     }
 
     @GetMapping("/info")
