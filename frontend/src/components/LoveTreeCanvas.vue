@@ -17,7 +17,7 @@ const containerRef = ref<HTMLDivElement>()
 const canvasRef = ref<HTMLCanvasElement>()
 
 // Canvas state
-let ctx: CanvasRenderingContext2D | null = null
+let ctx!: CanvasRenderingContext2D
 let animId = 0
 let W = 0
 let H = 0
