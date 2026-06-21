@@ -516,7 +516,7 @@ function setupCanvas() {
   canvas.style.width = `${W}px`
   canvas.style.height = `${H}px`
 
-  ctx = canvas.getContext('2d')
+  ctx = canvas.getContext('2d')!
   if (!ctx) return
 
   ctx.scale(dpr, dpr)
@@ -546,7 +546,7 @@ function onResize() {
   canvas.style.width = `${W}px`
   canvas.style.height = `${H}px`
 
-  ctx = canvas.getContext('2d')
+  ctx = canvas.getContext('2d')!
   if (!ctx) return
   ctx.scale(dpr, dpr)
 

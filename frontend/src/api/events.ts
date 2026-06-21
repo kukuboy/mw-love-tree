@@ -4,19 +4,24 @@ import type { ApiResponse, PageResult } from './client'
 export interface EventResponse {
   id: number
   coupleId: number
+  authorId: number
+  authorNickname: string
   title: string
-  description: string
+  content: string
+  eventType: string
   eventDate: string
-  eventType?: string
+  images: string[]
+  mood: string
   createdAt: string
-  updatedAt: string
 }
 
 export interface CreateEventRequest {
   title: string
-  description: string
+  content?: string
+  eventType: string
   eventDate: string
-  eventType?: string
+  images?: string[]
+  mood?: string
 }
 
 export interface UpdateEventRequest {

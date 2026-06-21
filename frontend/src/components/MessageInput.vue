@@ -14,7 +14,7 @@
       class="send-btn"
       :disabled="disabled || !text.trim()"
       @click="handleSend"
-      :title="isMobile ? '' : '发送 (Enter)'"
+      title="发送 (Enter)"
     >
       💌
     </button>

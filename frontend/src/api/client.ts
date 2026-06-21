@@ -20,7 +20,7 @@ export interface ApiResponse<T = unknown> {
 export interface PageResult<T> {
   records: T[]
   total: number
-  page: number
+  current: number
   size: number
   pages: number
 }

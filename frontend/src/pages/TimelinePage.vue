@@ -117,7 +117,7 @@ async function loadEvents() {
     const res = await getEvents(params)
     const records = (res.records || []) as unknown as EventData[]
     events.value.push(...records)
-    hasMore.value = res.page < res.pages
+    hasMore.value = res.current < res.pages
     page.value++
   } catch (e: any) {
     console.error('Failed to load events:', e)
