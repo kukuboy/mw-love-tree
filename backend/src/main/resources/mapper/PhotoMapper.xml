@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovetree.mapper.PhotoMapper">
+
+    <select id="selectPhotoPage" resultType="com.lovetree.dto.PhotoResponse">
+        SELECT p.id,
+               p.url,
+               p.caption,
+               p.uploader_id    AS uploaderId,
+               p.created_at     AS createdAt,
+               u.nickname       AS uploaderNickname
+        FROM photo p
+                 LEFT JOIN user u ON p.uploader_id = u.id
+        WHERE p.couple_id = #{coupleId}
+        ORDER BY p.created_at DESC
+    </select>
+
+</mapper>
