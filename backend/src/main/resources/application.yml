@@ -21,6 +21,12 @@ mybatis-plus:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mapper/*.xml
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
 lovetree:
   jwt:
     secret: ${JWT_SECRET:Lov3Tree_S3cr3tK3y_2024!@#$%^&*()Default}
