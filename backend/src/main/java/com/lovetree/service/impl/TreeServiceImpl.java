@@ -49,7 +49,7 @@ public class TreeServiceImpl implements TreeService {
             case "SPROUT":
                 return "🌿 嫩芽";
             case "SAPLING":
-                return "🎴 小树";
+                return "🪴 小树";
             case "BLOOM":
                 return "🌸 花树";
             case "FRUIT":
