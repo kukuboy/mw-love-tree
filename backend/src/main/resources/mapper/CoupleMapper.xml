@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovetree.mapper.CoupleMapper">
+    <select id="findByInviteCode" resultType="com.lovetree.entity.Couple">
+        SELECT * FROM couple WHERE invite_code = #{code}
+    </select>
+
+    <select id="findByUserId" resultType="com.lovetree.entity.Couple">
+        SELECT * FROM couple WHERE user1_id = #{userId} OR user2_id = #{userId}
+    </select>
+</mapper>
