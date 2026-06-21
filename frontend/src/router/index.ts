@@ -15,58 +15,56 @@ const routes: RouteRecordRaw[] = [
     meta: { requiresAuth: false },
   },
   {
-    path: '/invite',
-    name: 'Invite',
-    component: () => import('../pages/InvitePage.vue'),
+    path: '/',
+    component: () => import('../layouts/AuthenticatedLayout.vue'),
     meta: { requiresAuth: true },
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('../pages/DashboardPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/timeline',
-    name: 'Timeline',
-    component: () => import('../pages/TimelinePage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/event/new',
-    name: 'EventNew',
-    component: () => import('../pages/EventFormPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/event/:id',
-    name: 'EventDetail',
-    component: () => import('../pages/EventDetailPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/messages',
-    name: 'Messages',
-    component: () => import('../pages/MessagesPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/messages/:userId',
-    name: 'MessageDetail',
-    component: () => import('../pages/MessageDetailPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/album',
-    name: 'Album',
-    component: () => import('../pages/AlbumPage.vue'),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    component: () => import('../pages/SettingsPage.vue'),
-    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'invite',
+        name: 'Invite',
+        component: () => import('../pages/InvitePage.vue'),
+      },
+      {
+        path: 'dashboard',
+        name: 'Dashboard',
+        component: () => import('../pages/DashboardPage.vue'),
+      },
+      {
+        path: 'timeline',
+        name: 'Timeline',
+        component: () => import('../pages/TimelinePage.vue'),
+      },
+      {
+        path: 'event/new',
+        name: 'EventNew',
+        component: () => import('../pages/EventFormPage.vue'),
+      },
+      {
+        path: 'event/:id',
+        name: 'EventDetail',
+        component: () => import('../pages/EventDetailPage.vue'),
+      },
+      {
+        path: 'messages',
+        name: 'Messages',
+        component: () => import('../pages/MessagesPage.vue'),
+      },
+      {
+        path: 'messages/:userId',
+        name: 'MessageDetail',
+        component: () => import('../pages/MessageDetailPage.vue'),
+      },
+      {
+        path: 'album',
+        name: 'Album',
+        component: () => import('../pages/AlbumPage.vue'),
+      },
+      {
+        path: 'settings',
+        name: 'Settings',
+        component: () => import('../pages/SettingsPage.vue'),
+      },
+    ],
   },
 ]
 
