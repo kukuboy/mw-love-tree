@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lovetree.mapper.LoveEventMapper">
+
+    <select id="countByType" resultType="java.util.LinkedHashMap">
+        SELECT event_type AS eventType, COUNT(*) AS cnt
+        FROM love_event
+        WHERE couple_id = #{coupleId}
+        GROUP BY event_type
+    </select>
+
+    <select id="countByMonth" resultType="java.util.LinkedHashMap">
+        SELECT DATE_FORMAT(event_date, '%Y-%m') AS month, COUNT(*) AS cnt
+        FROM love_event
+        WHERE couple_id = #{coupleId}
+        GROUP BY DATE_FORMAT(event_date, '%Y-%m')
+        ORDER BY month
+    </select>
+
+</mapper>
