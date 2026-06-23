@@ -48,14 +48,13 @@ const events = ref<EventResponse[]>([])
 const loading = ref(true)
 
 const EVENT_EMOJIS: Record<string, string> = {
-  anniversary: '💍',
-  date: '💕',
-  travel: '✈️',
-  gift: '🎁',
-  celebration: '🎉',
-  milestone: '⭐',
-  daily: '💭',
-  food: '🍜',
+  'first_meet': '💕',
+  'first_date': '💗',
+  'travel': '✈️',
+  'birthday': '🎂',
+  'anniversary': '💝',
+  'daily': '📝',
+  'other': '📌',
 }
 
 const MOOD_EMOJIS: Record<string, string> = {

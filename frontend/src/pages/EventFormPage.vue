@@ -23,13 +23,13 @@
         <label class="form-label">事件类型</label>
         <select v-model="form.eventType" class="form-select" required>
           <option value="" disabled>选择事件类型</option>
-          <option value="初次见面">💕 初次见面</option>
-          <option value="初次约会">💗 初次约会</option>
-          <option value="旅行">✈️ 旅行</option>
-          <option value="生日">🎂 生日</option>
-          <option value="纪念日">💝 纪念日</option>
-          <option value="日常">📝 日常</option>
-          <option value="其他">📌 其他</option>
+          <option value="first_meet">💕 初次见面</option>
+          <option value="first_date">💗 初次约会</option>
+          <option value="travel">✈️ 旅行</option>
+          <option value="birthday">🎂 生日</option>
+          <option value="anniversary">💝 纪念日</option>
+          <option value="daily">📝 日常</option>
+          <option value="other">📌 其他</option>
         </select>
       </div>
 

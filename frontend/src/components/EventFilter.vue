@@ -25,13 +25,13 @@ const emit = defineEmits<{
 
 const filterOptions = [
   { label: '全部', value: '' },
-  { label: '💕初次见面', value: '初次见面' },
-  { label: '💗初次约会', value: '初次约会' },
-  { label: '✈️旅行', value: '旅行' },
-  { label: '🎂生日', value: '生日' },
-  { label: '💝纪念日', value: '纪念日' },
-  { label: '📝日常', value: '日常' },
-  { label: '📌其他', value: '其他' },
+  { label: '💕初次见面', value: 'first_meet' },
+  { label: '💗初次约会', value: 'first_date' },
+  { label: '✈️旅行', value: 'travel' },
+  { label: '🎂生日', value: 'birthday' },
+  { label: '💝纪念日', value: 'anniversary' },
+  { label: '📝日常', value: 'daily' },
+  { label: '📌其他', value: 'other' },
 ]
 
 function selectFilter(value: string) {

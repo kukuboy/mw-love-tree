@@ -37,7 +37,7 @@
       <!-- Event type badge -->
       <div class="type-badge" :style="{ backgroundColor: eventTypeColor }">
         <span class="type-badge-emoji">{{ eventTypeEmoji }}</span>
-        <span class="type-badge-label">{{ event.eventType }}</span>
+        <span class="type-badge-label">{{ EVENT_TYPE_LABELS[event.eventType] || event.eventType }}</span>
       </div>
 
       <!-- Title -->
@@ -112,23 +112,33 @@ const router = useRouter()
 const authStore = useAuthStore()
 
 const EVENT_TYPE_EMOJIS: Record<string, string> = {
-  '初次见面': '💕',
-  '初次约会': '💗',
-  '旅行': '✈️',
-  '生日': '🎂',
-  '纪念日': '💝',
-  '日常': '📝',
-  '其他': '📌',
+  'first_meet': '💕',
+  'first_date': '💗',
+  'travel': '✈️',
+  'birthday': '🎂',
+  'anniversary': '💝',
+  'daily': '📝',
+  'other': '📌',
+}
+
+const EVENT_TYPE_LABELS: Record<string, string> = {
+  'first_meet': '初次见面',
+  'first_date': '初次约会',
+  'travel': '旅行',
+  'birthday': '生日',
+  'anniversary': '纪念日',
+  'daily': '日常',
+  'other': '其他',
 }
 
 const EVENT_TYPE_COLORS: Record<string, string> = {
-  '初次见面': '#FF9AA2',
-  '初次约会': '#FFB7B2',
-  '旅行': '#B5EAD7',
-  '生日': '#FFDAC1',
-  '纪念日': '#E2F0CB',
-  '日常': '#C7CEEA',
-  '其他': '#F5E6CC',
+  'first_meet': '#FF9AA2',
+  'first_date': '#FFB7B2',
+  'travel': '#B5EAD7',
+  'birthday': '#FFDAC1',
+  'anniversary': '#E2F0CB',
+  'daily': '#C7CEEA',
+  'other': '#F5E6CC',
 }
 
 const MOOD_EMOJIS: Record<string, string> = {

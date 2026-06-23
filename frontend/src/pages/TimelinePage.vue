@@ -84,13 +84,13 @@ interface EventData {
 }
 
 const EVENT_TYPE_COLORS: Record<string, string> = {
-  '初次见面': '#FF9AA2',
-  '初次约会': '#FFB7B2',
-  '旅行': '#B5EAD7',
-  '生日': '#FFDAC1',
-  '纪念日': '#E2F0CB',
-  '日常': '#C7CEEA',
-  '其他': '#F5E6CC',
+  'first_meet': '#FF9AA2',
+  'first_date': '#FFB7B2',
+  'travel': '#B5EAD7',
+  'birthday': '#FFDAC1',
+  'anniversary': '#E2F0CB',
+  'daily': '#C7CEEA',
+  'other': '#F5E6CC',
 }
 
 const loading = ref(false)
