@@ -25,9 +25,14 @@
           <option value="" disabled>选择事件类型</option>
           <option value="first_meet">💕 初次见面</option>
           <option value="first_date">💗 初次约会</option>
+          <option value="first_kiss">💋 初吻</option>
+          <option value="proposal">💍 求婚</option>
           <option value="travel">✈️ 旅行</option>
           <option value="birthday">🎂 生日</option>
           <option value="anniversary">💝 纪念日</option>
+          <option value="valentine">🌹 情人节</option>
+          <option value="christmas">🎄 圣诞节</option>
+          <option value="new_year">🎉 新年</option>
           <option value="daily">📝 日常</option>
           <option value="other">📌 其他</option>
         </select>

@@ -25,11 +25,14 @@ import java.util.stream.Collectors;
 public class EventServiceImpl implements EventService {
 
     private static final Set<String> VALID_EVENT_TYPES = Set.of(
-            "first_meet", "first_date", "travel", "anniversary", "birthday", "daily", "other"
+            "first_meet", "first_date", "first_kiss", "proposal", "travel",
+            "anniversary", "birthday", "valentine", "christmas", "new_year",
+            "daily", "other"
     );
 
     private static final Set<String> BLOSSOM_TYPES = Set.of(
-            "first_meet", "first_date", "anniversary", "birthday"
+            "first_meet", "first_date", "first_kiss", "proposal",
+            "anniversary", "birthday", "valentine", "christmas", "new_year"
     );
 
     private final LoveEventMapper loveEventMapper;

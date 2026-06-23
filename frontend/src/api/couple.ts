@@ -35,3 +35,7 @@ export async function getCoupleInfo(): Promise<CoupleInfoResponse> {
   const response = await client.get<ApiResponse<CoupleInfoResponse>>('/couple/info')
   return response.data.data
 }
+
+export async function setTogetherDate(togetherDate: string): Promise<void> {
+  await client.put<ApiResponse<null>>('/couple/together-date', { togetherDate })
+}

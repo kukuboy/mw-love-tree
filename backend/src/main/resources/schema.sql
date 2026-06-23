@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS `couple` (
     `user2_id` BIGINT,
     `invite_code` VARCHAR(8) NOT NULL UNIQUE,
     `anniversary` DATE,
+    `together_date` DATE,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

@@ -33,6 +33,7 @@ export interface CoupleInfoResponse {
   partnerAvatar: string
   inviteCode: string
   anniversary: string
+  togetherDate: string
   daysTogether: number
 }
 

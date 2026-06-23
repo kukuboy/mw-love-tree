@@ -33,8 +33,13 @@
       </div>
 
       <div class="info-row">
-        <span class="info-label">纪念日</span>
+        <span class="info-label">绑定日期</span>
         <span class="info-value">{{ formattedAnniversary }}</span>
+      </div>
+
+      <div class="info-row" v-if="partnerInfo.togetherDate">
+        <span class="info-label">在一起</span>
+        <span class="info-value">{{ formattedTogetherDate }}</span>
       </div>
 
       <div class="info-row">
@@ -57,6 +62,12 @@ const partnerInfo = computed(() => coupleStore.partnerInfo)
 const formattedAnniversary = computed(() => {
   if (!partnerInfo.value?.anniversary) return '-'
   const d = new Date(partnerInfo.value.anniversary)
+  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
+})
+
+const formattedTogetherDate = computed(() => {
+  if (!partnerInfo.value?.togetherDate) return '-'
+  const d = new Date(partnerInfo.value.togetherDate)
   return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`
 })
 

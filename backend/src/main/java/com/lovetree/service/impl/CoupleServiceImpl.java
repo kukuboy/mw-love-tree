@@ -4,9 +4,11 @@ import com.lovetree.common.BusinessException;
 import com.lovetree.common.JwtUtil;
 import com.lovetree.dto.CoupleInfoResponse;
 import com.lovetree.entity.Couple;
+import com.lovetree.entity.LoveEvent;
 import com.lovetree.entity.Tree;
 import com.lovetree.entity.User;
 import com.lovetree.mapper.CoupleMapper;
+import com.lovetree.mapper.LoveEventMapper;
 import com.lovetree.mapper.TreeMapper;
 import com.lovetree.mapper.UserMapper;
 import com.lovetree.service.CoupleService;
@@ -27,12 +29,14 @@ public class CoupleServiceImpl implements CoupleService {
     private final CoupleMapper coupleMapper;
     private final TreeMapper treeMapper;
     private final UserMapper userMapper;
+    private final LoveEventMapper loveEventMapper;
     private final JwtUtil jwtUtil;
 
-    public CoupleServiceImpl(CoupleMapper coupleMapper, TreeMapper treeMapper, UserMapper userMapper, JwtUtil jwtUtil) {
+    public CoupleServiceImpl(CoupleMapper coupleMapper, TreeMapper treeMapper, UserMapper userMapper, LoveEventMapper loveEventMapper, JwtUtil jwtUtil) {
         this.coupleMapper = coupleMapper;
         this.treeMapper = treeMapper;
         this.userMapper = userMapper;
+        this.loveEventMapper = loveEventMapper;
         this.jwtUtil = jwtUtil;
     }
 
@@ -109,10 +113,11 @@ public class CoupleServiceImpl implements CoupleService {
         // Find partner user
         User partner = partnerId != null ? userMapper.selectById(partnerId) : null;
 
-        // Compute days together
+        // Compute days together (prefer togetherDate over anniversary)
         long daysTogether = 0;
-        if (couple.getAnniversary() != null) {
-            daysTogether = ChronoUnit.DAYS.between(couple.getAnniversary(), LocalDate.now());
+        LocalDate effectiveDate = couple.getTogetherDate() != null ? couple.getTogetherDate() : couple.getAnniversary();
+        if (effectiveDate != null) {
+            daysTogether = ChronoUnit.DAYS.between(effectiveDate, LocalDate.now());
         }
 
         return new CoupleInfoResponse(
@@ -120,8 +125,46 @@ public class CoupleServiceImpl implements CoupleService {
                 partner != null ? partner.getAvatar() : null,
                 couple.getInviteCode(),
                 couple.getAnniversary(),
+                couple.getTogetherDate(),
                 daysTogether
         );
+    }
+
+    @Override
+    @Transactional
+    public void setTogetherDate(Long coupleId, Long userId, LocalDate togetherDate) {
+        Couple couple = coupleMapper.selectById(coupleId);
+        if (couple == null) {
+            throw new BusinessException(404, "Couple not found");
+        }
+
+        LocalDate oldDate = couple.getTogetherDate();
+        couple.setTogetherDate(togetherDate);
+        coupleMapper.updateById(couple);
+
+        // Auto-generate or update the "在一起" event
+        if (oldDate == null && togetherDate != null) {
+            // First time setting together date: create a new event
+            LoveEvent event = new LoveEvent();
+            event.setCoupleId(coupleId);
+            event.setAuthorId(userId);
+            event.setTitle("在一起");
+            event.setEventType("anniversary");
+            event.setEventDate(togetherDate);
+            event.setContent("我们在一起的纪念日");
+            loveEventMapper.insert(event);
+        } else if (oldDate != null && togetherDate != null) {
+            // Update existing auto-generated event date
+            com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<LoveEvent> qw = new com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<>();
+            qw.eq("couple_id", coupleId)
+              .eq("event_type", "anniversary")
+              .eq("title", "在一起");
+            LoveEvent existing = loveEventMapper.selectOne(qw);
+            if (existing != null) {
+                existing.setEventDate(togetherDate);
+                loveEventMapper.updateById(existing);
+            }
+        }
     }
 
     private String generateCode() {

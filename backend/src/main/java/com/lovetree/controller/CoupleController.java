@@ -5,6 +5,7 @@ import com.lovetree.config.CurrentUser;
 import com.lovetree.dto.CoupleInfoResponse;
 import com.lovetree.dto.InviteResponse;
 import com.lovetree.dto.JoinRequest;
+import com.lovetree.dto.SetTogetherDateRequest;
 import com.lovetree.service.CoupleService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +39,12 @@ public class CoupleController {
         CoupleInfoResponse response = coupleService.getInfo(
                 currentUser.getCoupleId(), currentUser.getUserId());
         return ApiResponse.success(response);
+    }
+
+    @PutMapping("/together-date")
+    public ApiResponse<Void> setTogetherDate(CurrentUser currentUser,
+                                              @Valid @RequestBody SetTogetherDateRequest request) {
+        coupleService.setTogetherDate(currentUser.getCoupleId(), currentUser.getUserId(), request.getTogetherDate());
+        return ApiResponse.success(null);
     }
 }
