@@ -58,25 +58,35 @@ CREATE TABLE IF NOT EXISTS `photo` (
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Foreign keys
+-- Foreign keys (idempotent: dropped first to allow re-run)
+ALTER TABLE `couple` DROP FOREIGN KEY IF EXISTS `fk_couple_user1`;
 ALTER TABLE `couple` ADD CONSTRAINT `fk_couple_user1` FOREIGN KEY (`user1_id`) REFERENCES `user`(`id`);
+ALTER TABLE `couple` DROP FOREIGN KEY IF EXISTS `fk_couple_user2`;
 ALTER TABLE `couple` ADD CONSTRAINT `fk_couple_user2` FOREIGN KEY (`user2_id`) REFERENCES `user`(`id`);
+ALTER TABLE `tree` DROP FOREIGN KEY IF EXISTS `fk_tree_couple`;
 ALTER TABLE `tree` ADD CONSTRAINT `fk_tree_couple` FOREIGN KEY (`couple_id`) REFERENCES `couple`(`id`);
+ALTER TABLE `love_event` DROP FOREIGN KEY IF EXISTS `fk_love_event_couple`;
 ALTER TABLE `love_event` ADD CONSTRAINT `fk_love_event_couple` FOREIGN KEY (`couple_id`) REFERENCES `couple`(`id`);
+ALTER TABLE `love_event` DROP FOREIGN KEY IF EXISTS `fk_love_event_author`;
 ALTER TABLE `love_event` ADD CONSTRAINT `fk_love_event_author` FOREIGN KEY (`author_id`) REFERENCES `user`(`id`);
+ALTER TABLE `message` DROP FOREIGN KEY IF EXISTS `fk_message_couple`;
 ALTER TABLE `message` ADD CONSTRAINT `fk_message_couple` FOREIGN KEY (`couple_id`) REFERENCES `couple`(`id`);
+ALTER TABLE `message` DROP FOREIGN KEY IF EXISTS `fk_message_from`;
 ALTER TABLE `message` ADD CONSTRAINT `fk_message_from` FOREIGN KEY (`from_id`) REFERENCES `user`(`id`);
+ALTER TABLE `message` DROP FOREIGN KEY IF EXISTS `fk_message_to`;
 ALTER TABLE `message` ADD CONSTRAINT `fk_message_to` FOREIGN KEY (`to_id`) REFERENCES `user`(`id`);
+ALTER TABLE `photo` DROP FOREIGN KEY IF EXISTS `fk_photo_couple`;
 ALTER TABLE `photo` ADD CONSTRAINT `fk_photo_couple` FOREIGN KEY (`couple_id`) REFERENCES `couple`(`id`);
+ALTER TABLE `photo` DROP FOREIGN KEY IF EXISTS `fk_photo_uploader`;
 ALTER TABLE `photo` ADD CONSTRAINT `fk_photo_uploader` FOREIGN KEY (`uploader_id`) REFERENCES `user`(`id`);
 
--- Indexes
-CREATE INDEX `idx_couple_user1` ON `couple`(`user1_id`);
-CREATE INDEX `idx_couple_user2` ON `couple`(`user2_id`);
-CREATE INDEX `idx_couple_invite_code` ON `couple`(`invite_code`);
-CREATE INDEX `idx_love_event_couple` ON `love_event`(`couple_id`);
-CREATE INDEX `idx_love_event_date` ON `love_event`(`event_date`);
-CREATE INDEX `idx_message_couple` ON `message`(`couple_id`);
-CREATE INDEX `idx_message_from_to` ON `message`(`from_id`, `to_id`);
-CREATE INDEX `idx_photo_couple` ON `photo`(`couple_id`);
-CREATE INDEX `idx_photo_uploader` ON `photo`(`uploader_id`);
+-- Indexes (idempotent) using stored-procedure trick for older MySQL
+CREATE INDEX IF NOT EXISTS `idx_couple_user1` ON `couple`(`user1_id`);
+CREATE INDEX IF NOT EXISTS `idx_couple_user2` ON `couple`(`user2_id`);
+CREATE INDEX IF NOT EXISTS `idx_couple_invite_code` ON `couple`(`invite_code`);
+CREATE INDEX IF NOT EXISTS `idx_love_event_couple` ON `love_event`(`couple_id`);
+CREATE INDEX IF NOT EXISTS `idx_love_event_date` ON `love_event`(`event_date`);
+CREATE INDEX IF NOT EXISTS `idx_message_couple` ON `message`(`couple_id`);
+CREATE INDEX IF NOT EXISTS `idx_message_from_to` ON `message`(`from_id`, `to_id`);
+CREATE INDEX IF NOT EXISTS `idx_photo_couple` ON `photo`(`couple_id`);
+CREATE INDEX IF NOT EXISTS `idx_photo_uploader` ON `photo`(`uploader_id`);
