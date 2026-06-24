@@ -12,5 +12,6 @@ public class CoupleInfoResponse {
     private String partnerAvatar;
     private String inviteCode;
     private LocalDate anniversary;
+    private LocalDate togetherDate;
     private long daysTogether;
 }

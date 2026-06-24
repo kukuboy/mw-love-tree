@@ -27,6 +27,22 @@
       <CoupleInfo />
     </section>
 
+    <section class="settings-section card">
+      <h3 class="section-title">在一起日期</h3>
+      <p class="section-desc">设置你们真正在一起的日期，将自动生成纪念日事件。</p>
+      <div class="field-group">
+        <label class="field-label">在一起日期</label>
+        <input
+          v-model="togetherDate"
+          type="date"
+          class="field-input"
+        />
+      </div>
+      <button class="btn-save" @click="saveTogetherDate" :disabled="savingTogetherDate">
+        {{ savingTogetherDate ? '保存中...' : '保存在一起日期' }}
+      </button>
+    </section>
+
     <section class="settings-section card danger-zone">
       <h3 class="section-title danger-title">危险区域</h3>
       <p class="danger-desc">解除配对将清空所有数据，此操作不可撤销。</p>
@@ -72,6 +88,7 @@
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useCoupleStore } from '@/stores/couple'
+import { setTogetherDate as setTogetherDateApi } from '@/api/couple'
 import AvatarUploader from '@/components/AvatarUploader.vue'
 import CoupleInfo from '@/components/CoupleInfo.vue'
 
@@ -82,11 +99,22 @@ const avatarFile = ref<File | null>(null)
 const nickname = ref(authStore.nickname || '')
 const savingProfile = ref(false)
 
+const togetherDate = ref('')
+const savingTogetherDate = ref(false)
+
 const showConfirmModal = ref(false)
 const confirmText = ref('')
 
 onMounted(async () => {
   await coupleStore.fetchCoupleInfo()
+  // Initialize togetherDate from couple info
+  if (coupleStore.partnerInfo?.togetherDate) {
+    const d = new Date(coupleStore.partnerInfo.togetherDate)
+    const y = d.getFullYear()
+    const m = String(d.getMonth() + 1).padStart(2, '0')
+    const day = String(d.getDate()).padStart(2, '0')
+    togetherDate.value = `${y}-${m}-${day}`
+  }
 })
 
 async function saveProfile() {
@@ -100,6 +128,19 @@ async function saveProfile() {
     console.error('Failed to save profile:', e)
   } finally {
     savingProfile.value = false
+  }
+}
+
+async function saveTogetherDate() {
+  if (!togetherDate.value) return
+  savingTogetherDate.value = true
+  try {
+    await setTogetherDateApi(togetherDate.value)
+    await coupleStore.fetchCoupleInfo()
+  } catch (e) {
+    console.error('Failed to save together date:', e)
+  } finally {
+    savingTogetherDate.value = false
   }
 }
 
@@ -139,6 +180,14 @@ function handleUnpair() {
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--color-text);
+  opacity: 0.55;
+  margin-bottom: 14px;
+  line-height: 1.5;
 }
 
 .profile-row {

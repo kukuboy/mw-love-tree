@@ -13,5 +13,6 @@ public class Couple {
     private Long user2Id;
     private String inviteCode;
     private LocalDate anniversary;
+    private LocalDate togetherDate;
     private LocalDateTime createdAt;
 }

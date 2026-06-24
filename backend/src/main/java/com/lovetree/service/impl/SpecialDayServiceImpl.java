@@ -30,22 +30,27 @@ public class SpecialDayServiceImpl implements SpecialDayService {
     @Override
     public List<SpecialDayResponse> getSpecialDays(Long coupleId) {
         Couple couple = coupleMapper.selectById(coupleId);
-        if (couple == null || couple.getAnniversary() == null) {
+        if (couple == null) {
+            return new ArrayList<>();
+        }
+
+        // Use togetherDate if set, otherwise fall back to anniversary
+        LocalDate effectiveDate = couple.getTogetherDate() != null ? couple.getTogetherDate() : couple.getAnniversary();
+        if (effectiveDate == null) {
             return new ArrayList<>();
         }
 
         LocalDate today = LocalDate.now();
-        LocalDate anniversary = couple.getAnniversary();
 
-        // Compute days together from anniversary to today
-        long daysTogether = ChronoUnit.DAYS.between(anniversary, today);
+        // Compute days together from effective date to today
+        long daysTogether = ChronoUnit.DAYS.between(effectiveDate, today);
 
-        // Find next anniversary date (same month/day as anniversary, in current or next year)
-        LocalDate nextAnniversary = nextOccurrence(anniversary, today);
+        // Find next anniversary date (same month/day as effective date, in current or next year)
+        LocalDate nextAnniversary = nextOccurrence(effectiveDate, today);
         int daysUntil = (int) ChronoUnit.DAYS.between(today, nextAnniversary);
 
         List<SpecialDayResponse> days = new ArrayList<>();
-        days.add(new SpecialDayResponse("Anniversary", nextAnniversary, daysUntil, daysTogether));
+        days.add(new SpecialDayResponse("在一起纪念日", nextAnniversary, daysUntil, daysTogether));
 
         // Query events with type='anniversary' as additional special days
         QueryWrapper<LoveEvent> queryWrapper = new QueryWrapper<>();
