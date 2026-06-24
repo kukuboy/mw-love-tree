@@ -43,7 +43,8 @@ client.interceptors.response.use(
     return response
   },
   (error: AxiosError<ApiResponse>) => {
-    if (error.response?.status === 401) {
+    const isAuthRequest = error.config?.url?.includes('/auth/')
+    if (error.response?.status === 401 && !isAuthRequest) {
       localStorage.removeItem('token')
       window.location.href = '/login'
     }
