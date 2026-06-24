@@ -50,9 +50,14 @@ const loading = ref(true)
 const EVENT_EMOJIS: Record<string, string> = {
   'first_meet': '💕',
   'first_date': '💗',
+  'first_kiss': '💋',
+  'proposal': '💍',
   'travel': '✈️',
   'birthday': '🎂',
   'anniversary': '💝',
+  'valentine': '🌹',
+  'christmas': '🎄',
+  'new_year': '🎉',
   'daily': '📝',
   'other': '📌',
 }

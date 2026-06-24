@@ -86,9 +86,14 @@ interface EventData {
 const EVENT_TYPE_COLORS: Record<string, string> = {
   'first_meet': '#FF9AA2',
   'first_date': '#FFB7B2',
+  'first_kiss': '#F8B4C8',
+  'proposal': '#E8B4D8',
   'travel': '#B5EAD7',
   'birthday': '#FFDAC1',
   'anniversary': '#E2F0CB',
+  'valentine': '#F4A0B8',
+  'christmas': '#C1E1C1',
+  'new_year': '#FFD700',
   'daily': '#C7CEEA',
   'other': '#F5E6CC',
 }
@@ -387,10 +392,66 @@ onBeforeUnmount(() => {
   cursor: pointer;
   transition: all 0.2s;
   font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .retry-btn:hover {
   background: var(--color-primary);
   color: white;
+}
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 0 0 32px;
+  }
+
+  .timeline-header {
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .add-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+
+  .timeline-container {
+    padding-left: 24px;
+  }
+
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    left: -18px;
+    top: 20px;
+  }
+
+  .empty-state {
+    padding: 40px 20px;
+  }
+
+  .empty-icon {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-container {
+    padding-left: 20px;
+  }
+
+  .timeline-dot {
+    left: -16px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .timeline-line {
+    left: 9px;
+  }
 }
 </style>

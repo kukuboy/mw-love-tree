@@ -66,9 +66,14 @@ const router = useRouter()
 const EVENT_TYPE_EMOJIS: Record<string, string> = {
   'first_meet': '💕',
   'first_date': '💗',
+  'first_kiss': '💋',
+  'proposal': '💍',
   'travel': '✈️',
   'birthday': '🎂',
   'anniversary': '💝',
+  'valentine': '🌹',
+  'christmas': '🎄',
+  'new_year': '🎉',
   'daily': '📝',
   'other': '📌',
 }
@@ -76,9 +81,14 @@ const EVENT_TYPE_EMOJIS: Record<string, string> = {
 const EVENT_TYPE_LABELS: Record<string, string> = {
   'first_meet': '初次见面',
   'first_date': '初次约会',
+  'first_kiss': '初吻',
+  'proposal': '求婚',
   'travel': '旅行',
   'birthday': '生日',
   'anniversary': '纪念日',
+  'valentine': '情人节',
+  'christmas': '圣诞节',
+  'new_year': '新年',
   'daily': '日常',
   'other': '其他',
 }
@@ -86,9 +96,14 @@ const EVENT_TYPE_LABELS: Record<string, string> = {
 const EVENT_TYPE_COLORS: Record<string, string> = {
   'first_meet': '#FF9AA2',
   'first_date': '#FFB7B2',
+  'first_kiss': '#F8B4C8',
+  'proposal': '#E8B4D8',
   'travel': '#B5EAD7',
   'birthday': '#FFDAC1',
   'anniversary': '#E2F0CB',
+  'valentine': '#F4A0B8',
+  'christmas': '#C1E1C1',
+  'new_year': '#FFD700',
   'daily': '#C7CEEA',
   'other': '#F5E6CC',
 }

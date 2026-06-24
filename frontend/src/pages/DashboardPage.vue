@@ -281,11 +281,23 @@ onMounted(async () => {
   .side-panel {
     flex-direction: column;
   }
+
+  .tree-loading {
+    min-height: 280px;
+  }
 }
 
 @media (max-width: 480px) {
+  .dashboard-page {
+    padding: 12px;
+  }
+
   .side-panel {
     flex-direction: column;
+  }
+
+  .stat-value {
+    font-size: 15px;
   }
 }
 </style>

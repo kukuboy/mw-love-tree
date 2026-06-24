@@ -247,6 +247,7 @@ async function handleSubmit() {
   text-decoration: none;
   font-weight: 500;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .back-link:hover {
@@ -286,11 +287,12 @@ async function handleSubmit() {
   border: 1.5px solid rgba(232, 160, 191, 0.2);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
+  font-size: 16px;
   font-family: var(--font-family);
   color: var(--color-text);
   outline: none;
   transition: border-color 0.2s;
+  -webkit-appearance: none;
 }
 
 .form-input:focus,
@@ -351,18 +353,19 @@ async function handleSubmit() {
   position: absolute;
   top: 2px;
   right: 2px;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   border: none;
   background: rgba(0, 0, 0, 0.45);
   color: white;
-  font-size: 10px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .remove-existing-btn:hover {
@@ -391,6 +394,7 @@ async function handleSubmit() {
   font-family: var(--font-family);
   cursor: pointer;
   transition: opacity 0.2s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .submit-btn:hover:not(:disabled) {
@@ -416,5 +420,43 @@ async function handleSubmit() {
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 0 0 32px;
+  }
+
+  .form-header {
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .event-form {
+    padding: 20px 16px;
+    gap: 18px;
+  }
+
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-form {
+    padding: 16px 14px;
+    gap: 16px;
+  }
+
+  .existing-img-wrapper {
+    width: 70px;
+    height: 70px;
+  }
 }
 </style>

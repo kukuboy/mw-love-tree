@@ -202,4 +202,41 @@ async function copyInviteCode() {
   color: var(--color-text);
   opacity: 0.5;
 }
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 768px) {
+  .couple-info {
+    padding: 16px;
+  }
+
+  .partner-avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .partner-nickname {
+    font-size: 15px;
+  }
+
+  .info-row {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .info-label {
+    font-size: 12px;
+    width: 100%;
+    opacity: 0.45;
+  }
+
+  .info-value {
+    font-size: 13px;
+  }
+
+  .copy-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+}
 </style>

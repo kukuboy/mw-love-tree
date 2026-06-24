@@ -15,6 +15,9 @@ body {
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 /* Custom scrollbar styles */
@@ -43,4 +46,16 @@ body {
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Mobile-friendly input zoom prevention (iOS Safari zooms on < 16px) */
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+/* Safe area padding utility */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
