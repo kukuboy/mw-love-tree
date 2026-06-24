@@ -90,4 +90,24 @@ function selectFilter(value: string) {
   border-color: var(--color-primary);
   box-shadow: 0 2px 12px rgba(232, 160, 191, 0.3);
 }
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 768px) {
+  .filter-scroll {
+    gap: 8px;
+    padding: 4px 0 8px;
+  }
+
+  .filter-chip {
+    padding: 6px 14px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-chip {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
 </style>

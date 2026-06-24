@@ -230,16 +230,18 @@ function handleUnpair() {
 }
 
 .btn-save {
-  padding: 10px 24px;
+  width: 100%;
+  padding: 12px 24px;
   border: none;
   border-radius: 10px;
   background: var(--color-primary);
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: opacity 0.2s;
   font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-save:hover:not(:disabled) {
@@ -268,16 +270,18 @@ function handleUnpair() {
 }
 
 .btn-danger {
-  padding: 10px 20px;
+  width: 100%;
+  padding: 12px 20px;
   border: 1px solid #ff4d4f;
   border-radius: 10px;
   background: transparent;
   color: #ff4d4f;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
   font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-danger:hover {
@@ -346,7 +350,7 @@ function handleUnpair() {
 
 .btn-cancel,
 .btn-danger-confirm {
-  padding: 8px 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   border: none;
   font-size: 14px;
@@ -354,6 +358,7 @@ function handleUnpair() {
   cursor: pointer;
   transition: opacity 0.2s;
   font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-cancel {
@@ -384,5 +389,58 @@ function handleUnpair() {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+/* ---- Mobile responsive ---- */
+@media (max-width: 768px) {
+  .settings-page {
+    padding: 16px;
+  }
+
+  .page-title {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .settings-section {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+
+  .profile-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .profile-fields {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 16px;
+    align-items: flex-end;
+  }
+
+  .modal-dialog {
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-page {
+    padding: 12px;
+  }
+
+  .settings-section {
+    padding: 14px;
+  }
 }
 </style>

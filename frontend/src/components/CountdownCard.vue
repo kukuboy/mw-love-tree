@@ -100,4 +100,14 @@ const formattedDate = computed(() => {
   margin-bottom: 8px;
   animation: pulse-glow 1.5s ease-in-out infinite;
 }
+
+@media (max-width: 768px) {
+  .days-number {
+    font-size: 42px;
+  }
+
+  .celebration {
+    font-size: 18px;
+  }
+}
 </style>
