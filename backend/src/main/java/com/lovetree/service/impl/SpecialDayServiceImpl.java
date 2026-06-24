@@ -70,7 +70,7 @@ public class SpecialDayServiceImpl implements SpecialDayService {
                 int eventDaysUntil = (int) ChronoUnit.DAYS.between(today, nextEventDate);
 
                 // Avoid duplicate entries for the same date as the main anniversary
-                if (!nextEventDate.isEqual(nextAnniversary) || !eventDate.isEqual(anniversary)) {
+                if (!nextEventDate.isEqual(nextAnniversary) || !eventDate.isEqual(effectiveDate)) {
                     days.add(new SpecialDayResponse(event.getTitle(), nextEventDate, eventDaysUntil, eventDaysTogether));
                 }
             }
