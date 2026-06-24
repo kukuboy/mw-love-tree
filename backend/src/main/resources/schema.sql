@@ -82,6 +82,21 @@ ALTER TABLE `photo` DROP FOREIGN KEY IF EXISTS `fk_photo_uploader`;
 ALTER TABLE `photo` ADD CONSTRAINT `fk_photo_uploader` FOREIGN KEY (`uploader_id`) REFERENCES `user`(`id`);
 
 -- Indexes (idempotent) using stored-procedure trick for older MySQL
+-- Migrations: add new columns to existing tables (idempotent)
+-- together_date: separate from anniversary (binding date) to represent the actual "together" date
+SET @dbname = DATABASE();
+SET @tablename = 'couple';
+SET @columnname = 'together_date';
+SET @preparedStatement = (SELECT IF(
+  (SELECT COUNT(*) FROM INFORMATION_SCHEMA.COLUMNS
+   WHERE TABLE_SCHEMA = @dbname AND TABLE_NAME = @tablename AND COLUMN_NAME = @columnname) > 0,
+  'SELECT 1',
+  'ALTER TABLE `couple` ADD COLUMN `together_date` DATE NULL AFTER `anniversary`'
+));
+PREPARE alterIfNotExists FROM @preparedStatement;
+EXECUTE alterIfNotExists;
+DEALLOCATE PREPARE alterIfNotExists;
+
 CREATE INDEX IF NOT EXISTS `idx_couple_user1` ON `couple`(`user1_id`);
 CREATE INDEX IF NOT EXISTS `idx_couple_user2` ON `couple`(`user2_id`);
 CREATE INDEX IF NOT EXISTS `idx_couple_invite_code` ON `couple`(`invite_code`);
