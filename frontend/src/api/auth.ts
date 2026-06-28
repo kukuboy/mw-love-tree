@@ -14,11 +14,9 @@ export interface RegisterRequest {
 
 export interface AuthResponse {
   token: string
-  user: {
-    id: number
-    email: string
-    nickname: string
-  }
+  userId: number
+  nickname: string
+  coupleId: number | null
 }
 
 export async function login(data: LoginRequest): Promise<AuthResponse> {
