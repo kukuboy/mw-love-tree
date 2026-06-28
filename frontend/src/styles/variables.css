@@ -1,13 +1,19 @@
 :root {
-  --color-primary: #E8A0BF;
-  --color-secondary: #F3CCD5;
-  --color-accent: #C5898E;
-  --color-bg: #FFF5F7;
-  --color-text: #4A3B3C;
-  --color-gold: #D4A574;
+  /* Ethereal Botanical Theme - Dark */
+  --color-primary: #c9a86c;
+  --color-secondary: #d4bc94;
+  --color-accent: #e8b4b8;
+  --color-bg: #1a1f1c;
+  --color-text: #e8e4df;
+  --color-text-muted: #9a9590;
+  --color-gold: #d4a574;
+  --color-danger: #d4716e;
+  --color-success: #8fd19a;
 
-  --border-radius: 16px;
-  --shadow: 0 4px 24px rgba(232, 160, 191, 0.15);
+  --border-radius: 20px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 40px rgba(201, 168, 108, 0.15);
 
-  --font-family: "PingFang SC", "Noto Serif SC", sans-serif;
+  --font-display: "Cormorant Garamond", "Noto Serif SC", serif;
+  --font-body: "Quicksand", "PingFang SC", sans-serif;
 }
