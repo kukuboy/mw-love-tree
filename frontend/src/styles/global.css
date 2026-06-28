@@ -8,10 +8,19 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #FFF5F7 0%, #FDE8EC 50%, #FFF0F3 100%);
-  font-family: var(--font-family);
+  background: linear-gradient(
+    135deg,
+    #1a1f1c 0%,
+    #232a26 50%,
+    #1a1f1c 100%
+  );
+  font-family: var(--font-body);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -20,32 +29,36 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom scrollbar styles */
+/* Custom scrollbar styles - Ethereal Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: rgba(26, 31, 28, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-secondary);
+  background: rgba(201, 168, 108, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: rgba(201, 168, 108, 0.5);
 }
 
-/* Frosted glass card */
-.card {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+/* Glass card effect */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(35, 42, 38, 0.7) 0%,
+    rgba(45, 54, 48, 0.6) 100%
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(201, 168, 108, 0.2);
 }
 
 /* Mobile-friendly input zoom prevention (iOS Safari zooms on < 16px) */
@@ -58,4 +71,16 @@ input, select, textarea {
   .safe-area-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+/* Selection color */
+::selection {
+  background: rgba(201, 168, 108, 0.3);
+  color: var(--color-text);
+}
+
+/* Focus visible for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
