@@ -18,12 +18,9 @@ export const useCoupleStore = defineStore('couple', {
     async fetchCoupleInfo() {
       this.loading = true
       try {
-        const res = await fetchCoupleInfoApi()
-        // Cast through `any` because the API layer types may not match the actual backend DTO
-        const info = (res as any) as CoupleInfoResponse
+        const info = await fetchCoupleInfoApi()
         this.partnerInfo = info
 
-        // Persist the invite code from couple info if available
         if (info?.inviteCode) {
           this.inviteCode = info.inviteCode
         }
@@ -36,8 +33,7 @@ export const useCoupleStore = defineStore('couple', {
       this.loading = true
       try {
         const res = await createInviteCodeApi()
-        // Backend returns { inviteCode: string }
-        this.inviteCode = (res as any).inviteCode ?? null
+        this.inviteCode = res.inviteCode ?? null
       } finally {
         this.loading = false
       }
@@ -46,12 +42,10 @@ export const useCoupleStore = defineStore('couple', {
     async joinCouple(code: string) {
       const newToken = await joinCoupleApi(code)
 
-      // Update the stored JWT with the fresh token that includes coupleId
       const authStore = useAuthStore()
       authStore.token = newToken
       localStorage.setItem('token', newToken)
 
-      // After successfully joining, refresh couple info to get the latest data
       await this.fetchCoupleInfo()
     },
   },

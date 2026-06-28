@@ -1,25 +1,6 @@
 import client from './client'
 import type { ApiResponse } from './client'
-
-export interface InviteResponse {
-  inviteCode: string
-}
-
-export interface CoupleInfoResponse {
-  id: number
-  partner1: {
-    id: number
-    nickname: string
-    email: string
-  }
-  partner2: {
-    id: number
-    nickname: string
-    email: string
-  }
-  createdAt: string
-  inviteCode?: string
-}
+import type { InviteResponse, CoupleInfoResponse } from '@/types'
 
 export async function getInviteCode(): Promise<InviteResponse> {
   const response = await client.post<ApiResponse<InviteResponse>>('/couple/invite')

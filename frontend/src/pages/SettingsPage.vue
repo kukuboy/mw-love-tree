@@ -39,6 +39,9 @@
           placeholder="选择你们在一起的日期"
         />
       </div>
+      <div v-if="togetherDateMsg" :class="['save-message', togetherDateSuccess ? 'success' : 'error']">
+        {{ togetherDateMsg }}
+      </div>
       <button class="btn-save" @click="saveTogetherDate" :disabled="savingTogetherDate">
         {{ savingTogetherDate ? '保存中...' : '保存在一起日期' }}
       </button>
@@ -104,6 +107,8 @@ const savingProfile = ref(false)
 
 const togetherDate = ref('')
 const savingTogetherDate = ref(false)
+const togetherDateMsg = ref('')
+const togetherDateSuccess = ref(false)
 
 const showConfirmModal = ref(false)
 const confirmText = ref('')
@@ -129,12 +134,20 @@ async function saveProfile() {
 
 async function saveTogetherDate() {
   if (!togetherDate.value) return
+  togetherDateMsg.value = ''
   savingTogetherDate.value = true
   try {
     await setTogetherDateApi(togetherDate.value)
     await coupleStore.fetchCoupleInfo()
-  } catch (e) {
+    togetherDateSuccess.value = true
+    togetherDateMsg.value = '保存成功'
+    setTimeout(() => {
+      togetherDateMsg.value = ''
+    }, 2000)
+  } catch (e: any) {
     console.error('Failed to save together date:', e)
+    togetherDateSuccess.value = false
+    togetherDateMsg.value = e?.response?.data?.message || e?.message || '保存失败，请重试'
   } finally {
     savingTogetherDate.value = false
   }
@@ -223,6 +236,26 @@ function handleUnpair() {
 
 .field-input:focus {
   border-color: var(--color-primary);
+}
+
+.save-message {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.save-message.success {
+  background: rgba(82, 196, 26, 0.1);
+  border: 1px solid rgba(82, 196, 26, 0.3);
+  color: #52c41a;
+}
+
+.save-message.error {
+  background: rgba(255, 77, 79, 0.1);
+  border: 1px solid rgba(255, 77, 79, 0.3);
+  color: #ff4d4f;
 }
 
 .btn-save {
