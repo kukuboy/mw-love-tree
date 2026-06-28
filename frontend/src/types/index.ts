@@ -29,6 +29,7 @@ export interface InviteResponse {
 }
 
 export interface CoupleInfoResponse {
+  partnerId: number | null
   partnerNickname: string
   partnerAvatar: string
   inviteCode: string

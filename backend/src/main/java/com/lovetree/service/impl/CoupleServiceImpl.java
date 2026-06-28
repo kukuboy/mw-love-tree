@@ -121,6 +121,7 @@ public class CoupleServiceImpl implements CoupleService {
         }
 
         return new CoupleInfoResponse(
+                partnerId,
                 partner != null ? partner.getNickname() : null,
                 partner != null ? partner.getAvatar() : null,
                 couple.getInviteCode(),

@@ -60,7 +60,7 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import { useCoupleStore } from '@/stores/couple'
 import { getCoupleInfo } from '@/api/couple'
-import type { CoupleInfoResponse as ApiCoupleInfo } from '@/api/couple'
+import type { CoupleInfoResponse as ApiCoupleInfo } from '@/types'
 import { getUnreadCount } from '@/api/messages'
 
 const router = useRouter()
@@ -91,10 +91,7 @@ async function init() {
 
     // Fetch raw couple info to derive the partner's user ID
     const rawInfo: ApiCoupleInfo = await getCoupleInfo()
-    partnerId.value =
-      rawInfo.partner1.id === authStore.userId
-        ? rawInfo.partner2.id
-        : rawInfo.partner1.id
+    partnerId.value = rawInfo.partnerId
 
     // Fetch unread count (non-critical — swallow errors)
     try {
