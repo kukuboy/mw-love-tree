@@ -32,10 +32,11 @@
       <p class="section-desc">设置你们真正在一起的日期，将自动生成纪念日事件。</p>
       <div class="field-group">
         <label class="field-label">在一起日期</label>
-        <input
+        <DatePickerField
           v-model="togetherDate"
-          type="date"
-          class="field-input"
+          input-id="together-date"
+          name="together-date"
+          placeholder="选择你们在一起的日期"
         />
       </div>
       <button class="btn-save" @click="saveTogetherDate" :disabled="savingTogetherDate">
@@ -91,6 +92,8 @@ import { useCoupleStore } from '@/stores/couple'
 import { setTogetherDate as setTogetherDateApi } from '@/api/couple'
 import AvatarUploader from '@/components/AvatarUploader.vue'
 import CoupleInfo from '@/components/CoupleInfo.vue'
+import DatePickerField from '@/components/DatePickerField.vue'
+import { toDateInputValue } from '@/utils/date'
 
 const authStore = useAuthStore()
 const coupleStore = useCoupleStore()
@@ -107,14 +110,7 @@ const confirmText = ref('')
 
 onMounted(async () => {
   await coupleStore.fetchCoupleInfo()
-  // Initialize togetherDate from couple info
-  if (coupleStore.partnerInfo?.togetherDate) {
-    const d = new Date(coupleStore.partnerInfo.togetherDate)
-    const y = d.getFullYear()
-    const m = String(d.getMonth() + 1).padStart(2, '0')
-    const day = String(d.getDate()).padStart(2, '0')
-    togetherDate.value = `${y}-${m}-${day}`
-  }
+  togetherDate.value = toDateInputValue(coupleStore.partnerInfo?.togetherDate)
 })
 
 async function saveProfile() {

@@ -41,10 +41,11 @@
       <!-- Event date -->
       <div class="form-group">
         <label class="form-label">日期</label>
-        <input
+        <DatePickerField
           v-model="form.eventDate"
-          type="date"
-          class="form-input"
+          input-id="event-date"
+          name="event-date"
+          placeholder="选择回忆发生的日期"
           required
         />
       </div>
@@ -109,8 +110,10 @@ import { ref, reactive, onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getEvent, createEvent, updateEvent } from '@/api/events'
 import { uploadPhoto } from '@/api/photos'
+import DatePickerField from '@/components/DatePickerField.vue'
 import MoodPicker from '@/components/MoodPicker.vue'
 import ImageUploader from '@/components/ImageUploader.vue'
+import { toDateInputValue } from '@/utils/date'
 
 const route = useRoute()
 const router = useRouter()
@@ -141,14 +144,7 @@ onMounted(async () => {
       const data = event as any
       form.title = data.title || ''
       form.eventType = data.eventType || ''
-      // Format date for input[type=date]
-      if (data.eventDate) {
-        const d = new Date(data.eventDate)
-        const y = d.getFullYear()
-        const m = String(d.getMonth() + 1).padStart(2, '0')
-        const day = String(d.getDate()).padStart(2, '0')
-        form.eventDate = `${y}-${m}-${day}`
-      }
+      form.eventDate = toDateInputValue(data.eventDate)
       form.content = data.content || ''
       form.mood = data.mood || ''
       existingImages.value = data.images || []
