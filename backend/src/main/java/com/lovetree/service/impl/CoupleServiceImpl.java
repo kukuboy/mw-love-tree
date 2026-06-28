@@ -99,11 +99,7 @@ public class CoupleServiceImpl implements CoupleService {
 
     @Override
     public CoupleInfoResponse getInfo(Long coupleId, Long userId) {
-        // Find couple
-        Couple couple = coupleMapper.selectById(coupleId);
-        if (couple == null) {
-            throw new BusinessException(404, "Couple not found");
-        }
+        Couple couple = getCoupleForUser(coupleId, userId);
 
         // Determine partner ID
         Long partnerId = couple.getUser1Id().equals(userId)
@@ -133,10 +129,8 @@ public class CoupleServiceImpl implements CoupleService {
     @Override
     @Transactional
     public void setTogetherDate(Long coupleId, Long userId, LocalDate togetherDate) {
-        Couple couple = coupleMapper.selectById(coupleId);
-        if (couple == null) {
-            throw new BusinessException(404, "Couple not found");
-        }
+        Couple couple = getCoupleForUser(coupleId, userId);
+        Long resolvedCoupleId = couple.getId();
 
         LocalDate oldDate = couple.getTogetherDate();
         couple.setTogetherDate(togetherDate);
@@ -146,7 +140,7 @@ public class CoupleServiceImpl implements CoupleService {
         if (oldDate == null && togetherDate != null) {
             // First time setting together date: create a new event
             LoveEvent event = new LoveEvent();
-            event.setCoupleId(coupleId);
+            event.setCoupleId(resolvedCoupleId);
             event.setAuthorId(userId);
             event.setTitle("在一起");
             event.setEventType("anniversary");
@@ -156,7 +150,7 @@ public class CoupleServiceImpl implements CoupleService {
         } else if (oldDate != null && togetherDate != null) {
             // Update existing auto-generated event date
             com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<LoveEvent> qw = new com.baomidou.mybatisplus.core.conditions.query.QueryWrapper<>();
-            qw.eq("couple_id", coupleId)
+            qw.eq("couple_id", resolvedCoupleId)
               .eq("event_type", "anniversary")
               .eq("title", "在一起");
             LoveEvent existing = loveEventMapper.selectOne(qw);
@@ -173,5 +167,17 @@ public class CoupleServiceImpl implements CoupleService {
             sb.append(ALPHANUMERIC.charAt(RANDOM.nextInt(ALPHANUMERIC.length())));
         }
         return sb.toString();
+    }
+
+    private Couple getCoupleForUser(Long coupleId, Long userId) {
+        // Fall back to the user lookup so stale tokens without coupleId still work.
+        Couple couple = coupleId != null ? coupleMapper.selectById(coupleId) : null;
+        if (couple == null) {
+            couple = coupleMapper.findByUserId(userId);
+        }
+        if (couple == null) {
+            throw new BusinessException(404, "Couple not found");
+        }
+        return couple;
     }
 }
