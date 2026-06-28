@@ -8,6 +8,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 public class CoupleInfoResponse {
+    private Long partnerId;
     private String partnerNickname;
     private String partnerAvatar;
     private String inviteCode;
