@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 
 /**
  * Base test class for all controller tests.
@@ -108,48 +109,48 @@ public abstract class BaseControllerTest {
     /**
      * Make an authenticated GET request.
      */
-    protected MvcResult authenticatedGet(String url, String token) throws Exception {
+    protected ResultActions authenticatedGet(String url, String token) throws Exception {
         return mockMvc.perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                 .get(url)
                 .header("Authorization", "Bearer " + token)
-        ).andReturn();
+        );
     }
 
     /**
      * Make an authenticated POST request.
      */
-    protected MvcResult authenticatedPost(String url, String token, Object body) throws Exception {
+    protected ResultActions authenticatedPost(String url, String token, Object body) throws Exception {
         return mockMvc.perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                 .post(url)
                 .header("Authorization", "Bearer " + token)
                 .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(body))
-        ).andReturn();
+        );
     }
 
     /**
      * Make an authenticated PUT request.
      */
-    protected MvcResult authenticatedPut(String url, String token, Object body) throws Exception {
+    protected ResultActions authenticatedPut(String url, String token, Object body) throws Exception {
         return mockMvc.perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                 .put(url)
                 .header("Authorization", "Bearer " + token)
                 .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(body))
-        ).andReturn();
+        );
     }
 
     /**
      * Make an authenticated DELETE request.
      */
-    protected MvcResult authenticatedDelete(String url, String token) throws Exception {
+    protected ResultActions authenticatedDelete(String url, String token) throws Exception {
         return mockMvc.perform(
             org.springframework.test.web.servlet.request.MockMvcRequestBuilders
                 .delete(url)
                 .header("Authorization", "Bearer " + token)
-        ).andReturn();
+        );
     }
 }
