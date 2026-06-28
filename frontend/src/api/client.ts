@@ -48,7 +48,9 @@ client.interceptors.response.use(
       window.location.href = '/login'
     }
     const message = error.response?.data?.message || error.message || '请求失败'
-    return Promise.reject(new Error(message))
+    const err = new Error(message) as Error & { response?: AxiosError['response'] }
+    err.response = error.response
+    return Promise.reject(err)
   },
 )
 

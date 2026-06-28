@@ -2,6 +2,7 @@ package com.lovetree.common;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -13,13 +14,9 @@ import java.util.Date;
 public class JwtUtil {
 
     private final SecretKey key;
-    private static final long EXPIRATION_MS = 7 * 24 * 60 * 60 * 1000L; // 7 days
+    private static final long EXPIRATION_MS = 7 * 24 * 60 * 60 * 1000L;
 
-    public JwtUtil() {
-        String secret = System.getenv("JWT_SECRET");
-        if (secret == null || secret.isBlank()) {
-            secret = "lovetree-secret-change-me";
-        }
+    public JwtUtil(@Value("${lovetree.jwt.secret:lovetree-secret-change-me}") String secret) {
         this.key = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
     }
 
