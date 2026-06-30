@@ -173,8 +173,9 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--color-bg-glass);
   border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
 }
 
 .loading-spinner {
@@ -237,7 +238,7 @@ onMounted(async () => {
 .stat-value {
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-accent);
+  color: var(--color-primary);
   white-space: nowrap;
 }
 

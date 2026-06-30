@@ -73,15 +73,15 @@ const pickerValue = computed({
 }
 
 .date-picker :deep(.dp__theme_light) {
-  --dp-border-color: rgba(232, 160, 191, 0.2);
-  --dp-border-color-hover: rgba(197, 137, 142, 0.45);
+  --dp-border-color: var(--color-border);
+  --dp-border-color-hover: var(--color-primary);
   --dp-primary-color: var(--color-primary);
-  --dp-primary-text-color: #fff;
-  --dp-hover-color: rgba(232, 160, 191, 0.12);
-  --dp-icon-color: rgba(58, 46, 51, 0.45);
+  --dp-primary-text-color: var(--color-bg);
+  --dp-hover-color: rgba(201, 168, 108, 0.12);
+  --dp-icon-color: rgba(201, 168, 108, 0.5);
   --dp-text-color: var(--color-text);
-  --dp-background-color: #fff;
-  --dp-menu-border-color: rgba(232, 160, 191, 0.16);
+  --dp-background-color: var(--color-bg-surface);
+  --dp-menu-border-color: var(--color-border);
 }
 
 .date-picker :deep(.dp__input) {
@@ -89,9 +89,9 @@ const pickerValue = computed({
   min-height: 48px;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--color-bg-glass);
   font-size: 16px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   color: var(--color-text);
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -99,17 +99,17 @@ const pickerValue = computed({
 .date-picker :deep(.dp__input:focus),
 .date-picker :deep(.dp__input_focus) {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(232, 160, 191, 0.12);
+  box-shadow: 0 0 0 3px rgba(201, 168, 108, 0.12);
 }
 
 .date-picker :deep(.dp__menu) {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 18px 40px rgba(197, 137, 142, 0.18);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
 }
 
 .date-picker :deep(.dp__calendar_header_separator) {
-  background: rgba(232, 160, 191, 0.12);
+  background: var(--color-border);
 }
 
 .date-picker :deep(.dp__cell_inner) {

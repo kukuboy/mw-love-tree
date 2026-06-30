@@ -148,12 +148,12 @@ function goToDetail() {
 <style scoped>
 .event-card {
   display: flex;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(232, 160, 191, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -163,7 +163,7 @@ function goToDetail() {
 .event-card:hover,
 .event-card:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(232, 160, 191, 0.2);
+  box-shadow: 0 8px 32px rgba(201, 168, 108, 0.15);
 }
 
 .card-border {

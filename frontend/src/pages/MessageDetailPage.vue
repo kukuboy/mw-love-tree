@@ -199,10 +199,10 @@ onUnmounted(() => {
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(243, 204, 213, 0.3);
+  border-bottom: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 

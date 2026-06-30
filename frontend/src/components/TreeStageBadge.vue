@@ -35,14 +35,14 @@ const isBlooming = computed(() =>
   align-items: center;
   gap: 8px;
   padding: 8px 20px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: 100px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 2px 12px rgba(232, 160, 191, 0.15);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
   font-size: 14px;
-  color: var(--color-text);
+  color: var(--color-primary);
   white-space: nowrap;
   user-select: none;
   transition: box-shadow 0.3s ease;

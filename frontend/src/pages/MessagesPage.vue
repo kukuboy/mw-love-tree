@@ -177,7 +177,7 @@ onMounted(() => {
 
 .retry-btn:hover {
   background: var(--color-primary);
-  color: white;
+  color: var(--color-bg);
 }
 
 /* ---- Partner card ---- */
@@ -192,7 +192,7 @@ onMounted(() => {
 
 .partner-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(232, 160, 191, 0.2);
+  box-shadow: 0 6px 28px rgba(201, 168, 108, 0.15);
 }
 
 .partner-avatar-wrapper {
@@ -270,16 +270,17 @@ onMounted(() => {
   padding: 14px;
   border: none;
   border-radius: 18px;
-  background: var(--color-primary);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
 }
 
 .chat-btn:hover {
-  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(201, 168, 108, 0.3);
 }
 
 /* ---- Responsive ---- */
