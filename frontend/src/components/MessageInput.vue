@@ -68,22 +68,22 @@ function handleSend() {
   gap: 10px;
   padding: 12px 16px;
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(243, 204, 213, 0.3);
+  border-top: 1px solid var(--color-border);
   flex-shrink: 0;
 }
 
 .input-field {
   flex: 1;
-  border: 1px solid rgba(243, 204, 213, 0.4);
+  border: 1px solid var(--color-border);
   border-radius: 12px;
   padding: 10px 14px;
   font-size: 15px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--color-bg-glass);
   resize: none;
   outline: none;
   line-height: 1.5;
@@ -112,14 +112,15 @@ function handleSend() {
   height: 42px;
   border-radius: 50%;
   border: none;
-  background: var(--color-primary);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s, transform 0.15s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(201, 168, 108, 0.3);
 }
 
 .send-btn:hover:not(:disabled) {

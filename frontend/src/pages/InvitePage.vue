@@ -203,12 +203,12 @@ async function handleJoin() {
 
 /* Cards */
 .invite-card {
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--color-bg-glass);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: var(--border-radius);
-  box-shadow: 0 8px 32px rgba(232, 160, 191, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   padding: 40px 28px 32px;
   text-align: center;
   display: flex;
@@ -222,10 +222,10 @@ async function handleJoin() {
 }
 
 .card-title {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 700;
-  color: var(--color-accent);
+  font-weight: 500;
+  color: var(--color-primary);
   margin: 0 0 8px;
 }
 
@@ -245,24 +245,25 @@ async function handleJoin() {
   width: 100%;
   max-width: 240px;
   padding: 14px 24px;
-  background: linear-gradient(135deg, #E8A0BF, #C5898E);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
+  box-shadow: 0 4px 16px rgba(201, 168, 108, 0.3);
 }
 
 .btn-generate:hover:not(:disabled) {
   transform: scale(1.02);
-  box-shadow: 0 4px 16px rgba(232, 160, 191, 0.4);
+  box-shadow: 0 6px 24px rgba(201, 168, 108, 0.4);
 }
 
 .btn-generate:active:not(:disabled) {
@@ -284,7 +285,7 @@ async function handleJoin() {
 }
 
 .code-box {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(201, 168, 108, 0.08);
   border: 2px dashed var(--color-primary);
   border-radius: 12px;
   padding: 16px 24px;
@@ -294,29 +295,29 @@ async function handleJoin() {
 }
 
 .code-text {
-  font-family: 'Noto Serif SC', serif;
+  font-family: var(--font-display);
   font-size: 28px;
-  font-weight: 700;
-  color: var(--color-accent);
+  font-weight: 500;
+  color: var(--color-primary);
   letter-spacing: 6px;
   word-break: break-all;
 }
 
 .btn-copy {
   padding: 10px 24px;
-  background: rgba(232, 160, 191, 0.15);
-  border: 1px solid rgba(232, 160, 191, 0.3);
+  background: rgba(201, 168, 108, 0.12);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-size: 14px;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
 }
 
 .btn-copy:hover {
-  background: rgba(232, 160, 191, 0.25);
+  background: rgba(201, 168, 108, 0.2);
   transform: scale(1.02);
 }
 
@@ -342,12 +343,12 @@ async function handleJoin() {
 .input-field {
   width: 100%;
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-bg-glass);
   border: 2px solid transparent;
-  border-bottom: 2px solid rgba(232, 160, 191, 0.3);
+  border-bottom: 2px solid var(--color-border);
   border-radius: 10px;
   font-size: 16px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   color: var(--color-text);
   text-align: center;
   letter-spacing: 3px;
@@ -363,8 +364,8 @@ async function handleJoin() {
 
 .input-field:focus {
   border-color: var(--color-primary);
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 0 3px rgba(232, 160, 191, 0.15);
+  background: rgba(201, 168, 108, 0.05);
+  box-shadow: 0 0 0 3px rgba(201, 168, 108, 0.15);
 }
 
 .input-field:disabled {
@@ -375,24 +376,25 @@ async function handleJoin() {
 .btn-join {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #E8A0BF, #C5898E);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 600;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 48px;
+  box-shadow: 0 4px 16px rgba(201, 168, 108, 0.3);
 }
 
 .btn-join:hover:not(:disabled) {
   transform: scale(1.02);
-  box-shadow: 0 4px 16px rgba(232, 160, 191, 0.4);
+  box-shadow: 0 6px 24px rgba(201, 168, 108, 0.4);
 }
 
 .btn-join:active:not(:disabled) {
@@ -406,22 +408,22 @@ async function handleJoin() {
 
 /* Error message */
 .error-msg {
-  background: rgba(197, 137, 142, 0.1);
-  border: 1px solid rgba(197, 137, 142, 0.3);
+  background: rgba(212, 113, 110, 0.12);
+  border: 1px solid rgba(212, 113, 110, 0.3);
   border-radius: 10px;
   padding: 10px 14px;
   margin-top: 20px;
   width: 100%;
   font-size: 13px;
-  color: var(--color-accent);
+  color: var(--color-danger-soft);
 }
 
 /* Spinner */
 .spinner {
   width: 18px;
   height: 18px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
+  border: 2px solid rgba(26, 31, 28, 0.3);
+  border-top-color: var(--color-bg);
   border-radius: 50%;
   animation: spin 0.6s linear infinite;
   display: inline-block;

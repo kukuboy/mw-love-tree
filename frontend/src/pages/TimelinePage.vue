@@ -196,13 +196,13 @@ onBeforeUnmount(() => {
 .add-btn {
   padding: 8px 18px;
   border-radius: 20px;
-  background: linear-gradient(135deg, var(--color-primary), #D687A8);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
 }
 
 .add-btn:hover {
@@ -288,13 +288,13 @@ onBeforeUnmount(() => {
   display: inline-block;
   padding: 12px 28px;
   border-radius: 24px;
-  background: linear-gradient(135deg, var(--color-primary), #D687A8);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
 }
 
 .empty-btn:hover {
@@ -330,8 +330,8 @@ onBeforeUnmount(() => {
   height: 14px;
   border-radius: 50%;
   background: var(--color-primary);
-  border: 3px solid white;
-  box-shadow: 0 0 0 2px rgba(232, 160, 191, 0.3);
+  border: 3px solid var(--color-bg-surface);
+  box-shadow: 0 0 0 2px rgba(201, 168, 108, 0.3);
   z-index: 1;
 }
 
@@ -376,7 +376,7 @@ onBeforeUnmount(() => {
 }
 
 .error-state p {
-  color: #ff4d4f;
+  color: var(--color-danger-soft);
   font-size: 14px;
   margin-bottom: 16px;
 }
@@ -391,13 +391,13 @@ onBeforeUnmount(() => {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
 }
 
 .retry-btn:hover {
   background: var(--color-primary);
-  color: white;
+  color: var(--color-bg);
 }
 
 /* ---- Mobile responsive ---- */

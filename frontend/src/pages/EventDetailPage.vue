@@ -284,19 +284,19 @@ function closeLightbox() {
 
 .back-btn {
   padding: 6px 14px;
-  border: 1.5px solid rgba(232, 160, 191, 0.3);
+  border: 1.5px solid var(--color-border);
   border-radius: 18px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-bg-glass);
   color: var(--color-text);
   font-size: 13px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .back-btn:hover {
   border-color: var(--color-primary);
-  background: rgba(232, 160, 191, 0.08);
+  background: rgba(201, 168, 108, 0.08);
 }
 
 .header-actions {
@@ -309,13 +309,13 @@ function closeLightbox() {
   border: none;
   border-radius: 18px;
   font-size: 13px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
 .edit-btn {
-  background: rgba(232, 160, 191, 0.15);
+  background: rgba(201, 168, 108, 0.15);
   color: var(--color-primary);
 }
 
@@ -324,8 +324,8 @@ function closeLightbox() {
 }
 
 .delete-btn {
-  background: rgba(255, 77, 79, 0.1);
-  color: #ff4d4f;
+  background: rgba(212, 113, 110, 0.12);
+  color: var(--color-danger-soft);
 }
 
 .delete-btn:hover {

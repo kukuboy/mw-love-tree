@@ -70,11 +70,11 @@ function isActive(path: string): boolean {
   height: calc(100vh - 64px);
   z-index: 999;
 
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--color-bg-glass);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border-right: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 2px 0 12px rgba(232, 160, 191, 0.06);
+  border-right: 1px solid var(--color-border);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
 
   display: flex;
   flex-direction: column;
@@ -102,13 +102,13 @@ function isActive(path: string): boolean {
 }
 
 .nav-item:hover {
-  background: rgba(232, 160, 191, 0.10);
+  background: rgba(201, 168, 108, 0.10);
   transform: translateX(4px);
 }
 
 .nav-item.active {
-  background: rgba(232, 160, 191, 0.20);
-  color: var(--color-accent);
+  background: rgba(201, 168, 108, 0.20);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -135,11 +135,11 @@ function isActive(path: string): boolean {
   align-items: stretch;
   justify-content: space-around;
 
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-top: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 -2px 12px rgba(232, 160, 191, 0.08);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
 
   padding: 4px 0;
   /* Safe area for iOS notch */
@@ -164,7 +164,7 @@ function isActive(path: string): boolean {
 
 .tab-item.active {
   opacity: 1;
-  color: var(--color-accent);
+  color: var(--color-primary);
 }
 
 .tab-item.active::after {

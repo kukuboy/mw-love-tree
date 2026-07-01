@@ -280,11 +280,11 @@ async function handleSubmit() {
 .form-textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 1.5px solid rgba(232, 160, 191, 0.2);
+  border: 1.5px solid var(--color-border);
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--color-bg-glass);
   font-size: 16px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   color: var(--color-text);
   outline: none;
   transition: border-color 0.2s;
@@ -305,7 +305,7 @@ async function handleSubmit() {
 
 .form-select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C5898E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a86c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   padding-right: 36px;
@@ -372,8 +372,9 @@ async function handleSubmit() {
 .submit-error {
   padding: 10px 14px;
   border-radius: 10px;
-  background: rgba(255, 77, 79, 0.08);
-  color: #ff4d4f;
+  background: rgba(212, 113, 110, 0.12);
+  border: 1px solid rgba(212, 113, 110, 0.3);
+  color: var(--color-danger-soft);
   font-size: 13px;
 }
 
@@ -383,18 +384,20 @@ async function handleSubmit() {
   padding: 14px;
   border: none;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--color-primary), #D687A8);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   font-size: 16px;
   font-weight: 700;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 4px 16px rgba(201, 168, 108, 0.25);
 }
 
 .submit-btn:hover:not(:disabled) {
-  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(201, 168, 108, 0.35);
 }
 
 .submit-btn:disabled {
@@ -406,8 +409,8 @@ async function handleSubmit() {
   display: inline-block;
   width: 16px;
   height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: white;
+  border: 2px solid rgba(26, 31, 28, 0.3);
+  border-top-color: var(--color-bg);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   vertical-align: middle;

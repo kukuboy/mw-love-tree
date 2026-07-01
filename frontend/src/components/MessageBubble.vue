@@ -58,11 +58,13 @@ const formattedTime = computed(() => {
   white-space: pre-wrap;
 }
 
-/* Partner (left) bubble — pink bg with left tail */
+/* Partner (left) bubble — accent bg with left tail */
 .bubble:not(.is-mine) {
-  background: #F3CCD5;
+  background: rgba(232, 180, 184, 0.15);
+  border: 1px solid rgba(232, 180, 184, 0.2);
   border-bottom-left-radius: 4px;
   align-self: flex-start;
+  color: var(--color-text);
 }
 
 .bubble:not(.is-mine)::after {
@@ -71,16 +73,16 @@ const formattedTime = computed(() => {
   left: -7px;
   bottom: 10px;
   border: 7px solid transparent;
-  border-right-color: #F3CCD5;
+  border-right-color: rgba(232, 180, 184, 0.15);
   border-left: 0;
 }
 
-/* Me (right) bubble — white bg with right tail */
+/* Me (right) bubble — primary bg with right tail */
 .bubble.is-mine {
-  background: #FFFFFF;
-  border: 1px solid rgba(243, 204, 213, 0.4);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   border-bottom-right-radius: 4px;
   align-self: flex-end;
+  color: var(--color-bg);
 }
 
 .bubble.is-mine::after {
@@ -89,7 +91,7 @@ const formattedTime = computed(() => {
   right: -7px;
   bottom: 10px;
   border: 7px solid transparent;
-  border-left-color: #FFFFFF;
+  border-left-color: var(--color-primary);
   border-right: 0;
 }
 

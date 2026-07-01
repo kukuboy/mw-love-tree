@@ -108,11 +108,11 @@ onUnmounted(() => {
   justify-content: space-between;
   padding: 0 24px;
 
-  background: rgba(255, 255, 255, 0.65);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 2px 12px rgba(232, 160, 191, 0.1);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Left — brand */
@@ -160,7 +160,7 @@ onUnmounted(() => {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid var(--color-border);
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -170,12 +170,12 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(232, 160, 191, 0.25);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .avatar-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 4px 14px rgba(232, 160, 191, 0.4);
+  box-shadow: 0 4px 14px rgba(201, 168, 108, 0.3);
 }
 
 /* Dropdown */
@@ -184,12 +184,12 @@ onUnmounted(() => {
   top: calc(100% + 8px);
   right: 0;
   min-width: 150px;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--color-bg-glass-strong);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(232, 160, 191, 0.18);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border);
   padding: 6px;
   z-index: 1001;
   overflow: hidden;
@@ -215,20 +215,20 @@ onUnmounted(() => {
 }
 
 .dropdown-item:hover {
-  background: rgba(232, 160, 191, 0.12);
+  background: rgba(201, 168, 108, 0.12);
 }
 
 .dropdown-item--danger {
-  color: var(--color-accent);
+  color: var(--color-danger);
 }
 
 .dropdown-item--danger:hover {
-  background: rgba(197, 137, 142, 0.12);
+  background: rgba(212, 113, 110, 0.12);
 }
 
 .dropdown-divider {
   height: 1px;
-  background: rgba(232, 160, 191, 0.15);
+  background: var(--color-border-soft);
   margin: 4px 8px;
 }
 

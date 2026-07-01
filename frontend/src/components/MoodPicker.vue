@@ -51,7 +51,7 @@ function selectMood(value: string) {
   gap: 6px;
   padding: 14px 20px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-bg-glass);
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -61,15 +61,15 @@ function selectMood(value: string) {
 }
 
 .mood-option:hover {
-  border-color: rgba(232, 160, 191, 0.3);
-  background: rgba(255, 255, 255, 0.7);
+  border-color: var(--color-border);
+  background: rgba(201, 168, 108, 0.08);
 }
 
 .mood-option.selected {
   transform: scale(1.15);
   border-color: var(--color-primary);
-  background: rgba(232, 160, 191, 0.12);
-  box-shadow: 0 0 20px rgba(232, 160, 191, 0.3);
+  background: rgba(201, 168, 108, 0.15);
+  box-shadow: 0 0 20px rgba(201, 168, 108, 0.25);
 }
 
 .mood-emoji {

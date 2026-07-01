@@ -161,7 +161,7 @@ onMounted(async () => {
 .event-card:hover,
 .event-card:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(232, 160, 191, 0.2);
+  box-shadow: 0 6px 20px rgba(201, 168, 108, 0.15);
 }
 
 .event-icon {
@@ -172,7 +172,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(232, 160, 191, 0.1);
+  background: rgba(201, 168, 108, 0.1);
   border-radius: 10px;
 }
 

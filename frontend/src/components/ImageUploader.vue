@@ -175,13 +175,13 @@ function formatSize(bytes: number): string {
 
 .drop-zone {
   position: relative;
-  border: 2px dashed rgba(232, 160, 191, 0.35);
+  border: 2px dashed var(--color-border);
   border-radius: 16px;
   padding: 28px 20px;
   text-align: center;
   cursor: pointer;
   transition: all 0.25s ease;
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--color-bg-glass);
   min-height: 100px;
   display: flex;
   align-items: center;
@@ -191,12 +191,12 @@ function formatSize(bytes: number): string {
 
 .drop-zone:hover {
   border-color: var(--color-primary);
-  background: rgba(232, 160, 191, 0.05);
+  background: rgba(201, 168, 108, 0.05);
 }
 
 .drop-zone.drag-over {
   border-color: var(--color-primary);
-  background: rgba(232, 160, 191, 0.1);
+  background: rgba(201, 168, 108, 0.1);
   border-style: solid;
   transform: scale(1.01);
 }

@@ -67,11 +67,11 @@ function selectFilter(value: string) {
   flex-shrink: 0;
   padding: 8px 18px;
   border-radius: 20px;
-  border: 1.5px solid rgba(232, 160, 191, 0.25);
-  background: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-glass);
   color: var(--color-text);
   font-size: 13px;
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -81,14 +81,14 @@ function selectFilter(value: string) {
 
 .filter-chip:hover {
   border-color: var(--color-primary);
-  background: rgba(232, 160, 191, 0.08);
+  background: rgba(201, 168, 108, 0.1);
 }
 
 .filter-chip.active {
-  background: var(--color-primary);
-  color: white;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: var(--color-bg);
   border-color: var(--color-primary);
-  box-shadow: 0 2px 12px rgba(232, 160, 191, 0.3);
+  box-shadow: 0 2px 12px rgba(201, 168, 108, 0.3);
 }
 
 /* ---- Mobile responsive ---- */
