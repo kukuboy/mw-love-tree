@@ -69,7 +69,7 @@
           <div class="profile-content">
             <div class="avatar-container">
               <div class="avatar-wrapper">
-                <AvatarUploader v-model="avatarFile" />
+                <AvatarUploader v-model="avatarFile" :initial-url="currentAvatarUrl" />
                 <div class="avatar-ring"></div>
                 <div class="avatar-glow"></div>
               </div>
@@ -104,6 +104,21 @@
             <span class="btn-text">{{ savingProfile ? '保存中...' : '保存资料' }}</span>
             <span class="btn-glow"></span>
           </button>
+
+          <transition name="message-fade">
+            <div v-if="profileMsg" :class="['save-message', profileSuccess ? 'success' : 'error']">
+              <span class="message-icon">
+                <svg v-if="profileSuccess" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M15 9l-6 6M9 9l6 6"/>
+                </svg>
+              </span>
+              {{ profileMsg }}
+            </div>
+          </transition>
         </div>
       </section>
 
@@ -268,10 +283,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useCoupleStore } from '@/stores/couple'
 import { setTogetherDate as setTogetherDateApi } from '@/api/couple'
+import { uploadAvatar as uploadAvatarApi } from '@/api/auth'
 import AvatarUploader from '@/components/AvatarUploader.vue'
 import CoupleInfo from '@/components/CoupleInfo.vue'
 import DatePickerField from '@/components/DatePickerField.vue'
@@ -283,6 +299,8 @@ const coupleStore = useCoupleStore()
 const avatarFile = ref<File | null>(null)
 const nickname = ref(authStore.nickname || '')
 const savingProfile = ref(false)
+const profileMsg = ref('')
+const profileSuccess = ref(false)
 
 const togetherDate = ref('')
 const savingTogetherDate = ref(false)
@@ -292,6 +310,8 @@ const togetherDateSuccess = ref(false)
 const showConfirmModal = ref(false)
 const confirmText = ref('')
 
+const currentAvatarUrl = computed(() => authStore.avatar || null)
+
 onMounted(async () => {
   await coupleStore.fetchCoupleInfo()
   togetherDate.value = toDateInputValue(coupleStore.partnerInfo?.togetherDate)
@@ -299,13 +319,41 @@ onMounted(async () => {
 
 async function saveProfile() {
   savingProfile.value = true
+  profileMsg.value = ''
   try {
+    // Upload avatar first if a new file was selected
+    if (avatarFile.value) {
+      try {
+        const avatarUrl = await uploadAvatarApi(avatarFile.value)
+        authStore.setAvatar(avatarUrl)
+        avatarFile.value = null
+        profileSuccess.value = true
+        profileMsg.value = '头像已更新'
+      } catch (e: any) {
+        console.error('Failed to upload avatar:', e)
+        profileSuccess.value = false
+        profileMsg.value = e?.response?.data?.message || e?.message || '头像上传失败'
+        return
+      }
+    }
+
     if (nickname.value) {
       authStore.nickname = nickname.value
       localStorage.setItem('nickname', nickname.value)
     }
+
+    if (!profileMsg.value) {
+      profileSuccess.value = true
+      profileMsg.value = '保存成功'
+    }
+
+    setTimeout(() => {
+      profileMsg.value = ''
+    }, 2000)
   } catch (e) {
     console.error('Failed to save profile:', e)
+    profileSuccess.value = false
+    profileMsg.value = '保存失败'
   } finally {
     savingProfile.value = false
   }

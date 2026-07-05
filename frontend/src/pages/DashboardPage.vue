@@ -9,6 +9,8 @@
             :stage="treeStore.tree.stage"
             :leaf-count="treeStore.tree.leafCount"
             :flower-count="treeStore.tree.flowerCount"
+            :events="treeEvents"
+            @leaf-click="onLeafClick"
           />
           <div v-else class="tree-loading">
             <div class="loading-spinner" />
@@ -20,6 +22,9 @@
             :stage="treeStore.tree.stage"
             :stage-label="treeStore.tree.stageLabel"
           />
+          <div v-if="treeEvents.length > 0" class="leaf-hint">
+            💡 点击树上的叶子查看回忆 · 右上角按钮可全屏放大
+          </div>
         </div>
       </div>
 
@@ -57,22 +62,32 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import { useTreeStore } from '@/stores/tree'
 import { useCoupleStore } from '@/stores/couple'
 import { getSpecialDays } from '@/api/specialDays'
 import type { SpecialDayResponse as ApiSpecialDay } from '@/api/specialDays'
+import { getEvents } from '@/api/events'
+import type { EventResponse } from '@/api/events'
 import LoveTreeCanvas from '@/components/LoveTreeCanvas.vue'
 import TreeStageBadge from '@/components/TreeStageBadge.vue'
 import CountdownCard from '@/components/CountdownCard.vue'
 import RecentEvents from '@/components/RecentEvents.vue'
 
+const router = useRouter()
 const treeStore = useTreeStore()
 const coupleStore = useCoupleStore()
 
 // ---- Data ----
 const specialDays = ref<ApiSpecialDay[]>([])
+const treeEvents = ref<EventResponse[]>([])
 const treeStats = computed(() => treeStore.stats)
 const coupleInfo = computed(() => coupleStore.partnerInfo)
+
+// ---- Click handler: navigate to event detail ----
+function onLeafClick(eventId: number) {
+  router.push(`/event/${eventId}`)
+}
 
 // ---- Computed: next upcoming special day ----
 interface UpcomingDay {
@@ -135,6 +150,14 @@ onMounted(async () => {
   } catch (e) {
     console.error('Failed to fetch special days:', e)
   }
+
+  // Fetch events for tree leaves
+  try {
+    const res = await getEvents({ page: 1, size: 100 })
+    treeEvents.value = res.records || []
+  } catch (e) {
+    console.error('Failed to fetch tree events:', e)
+  }
 })
 </script>
 
@@ -195,7 +218,20 @@ onMounted(async () => {
 
 .stage-badge-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaf-hint {
+  font-size: 12px;
+  color: var(--color-text);
+  opacity: 0.6;
+  text-align: center;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: var(--color-bg-glass);
+  border: 1px solid var(--color-border-soft);
 }
 
 /* ---- Side panel ---- */
