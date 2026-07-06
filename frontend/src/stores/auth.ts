@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', {
     userId: null as number | null,
     nickname: null as string | null,
     coupleId: null as number | null,
+    avatar: null as string | null,
     isLoggedIn: false,
   }),
 
@@ -18,6 +19,7 @@ export const useAuthStore = defineStore('auth', {
       this.userId = data.userId ?? null
       this.nickname = data.nickname ?? null
       this.coupleId = data.coupleId ?? null
+      this.avatar = data.avatar ?? null
       this.isLoggedIn = true
 
       if (this.token) {
@@ -25,6 +27,7 @@ export const useAuthStore = defineStore('auth', {
         if (this.userId != null) localStorage.setItem('userId', String(this.userId))
         if (this.nickname) localStorage.setItem('nickname', this.nickname)
         if (this.coupleId != null) localStorage.setItem('coupleId', String(this.coupleId))
+        if (this.avatar) localStorage.setItem('avatar', this.avatar)
       }
     },
 
@@ -34,6 +37,7 @@ export const useAuthStore = defineStore('auth', {
       this.userId = data.userId ?? null
       this.nickname = data.nickname ?? null
       this.coupleId = data.coupleId ?? null
+      this.avatar = data.avatar ?? null
       this.isLoggedIn = true
 
       if (this.token) {
@@ -41,6 +45,16 @@ export const useAuthStore = defineStore('auth', {
         if (this.userId != null) localStorage.setItem('userId', String(this.userId))
         if (this.nickname) localStorage.setItem('nickname', this.nickname)
         if (this.coupleId != null) localStorage.setItem('coupleId', String(this.coupleId))
+        if (this.avatar) localStorage.setItem('avatar', this.avatar)
+      }
+    },
+
+    setAvatar(avatar: string) {
+      this.avatar = avatar
+      if (avatar) {
+        localStorage.setItem('avatar', avatar)
+      } else {
+        localStorage.removeItem('avatar')
       }
     },
 
@@ -49,12 +63,14 @@ export const useAuthStore = defineStore('auth', {
       this.userId = null
       this.nickname = null
       this.coupleId = null
+      this.avatar = null
       this.isLoggedIn = false
 
       localStorage.removeItem('token')
       localStorage.removeItem('userId')
       localStorage.removeItem('nickname')
       localStorage.removeItem('coupleId')
+      localStorage.removeItem('avatar')
 
       router.push('/login')
     },
@@ -66,6 +82,7 @@ export const useAuthStore = defineStore('auth', {
         this.userId = Number(localStorage.getItem('userId')) || null
         this.nickname = localStorage.getItem('nickname') || null
         this.coupleId = Number(localStorage.getItem('coupleId')) || null
+        this.avatar = localStorage.getItem('avatar') || null
         this.isLoggedIn = true
       } else {
         this.isLoggedIn = false

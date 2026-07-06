@@ -20,10 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onBeforeUnmount } from 'vue'
+import { ref, watch, onBeforeUnmount, computed } from 'vue'
 
 const props = defineProps<{
   modelValue: File | null
+  initialUrl?: string | null
 }>()
 
 const emit = defineEmits<{
@@ -31,14 +32,21 @@ const emit = defineEmits<{
 }>()
 
 const fileInputRef = ref<HTMLInputElement | null>(null)
-const previewUrl = ref<string | null>(null)
+const localPreviewUrl = ref<string | null>(null)
+
+// Show existing remote avatar when no new file is selected
+const previewUrl = computed(() => {
+  if (localPreviewUrl.value) return localPreviewUrl.value
+  if (props.initialUrl) return props.initialUrl
+  return null
+})
 
 watch(
   () => props.modelValue,
   (newVal) => {
-    if (!newVal && previewUrl.value) {
-      URL.revokeObjectURL(previewUrl.value)
-      previewUrl.value = null
+    if (!newVal && localPreviewUrl.value) {
+      URL.revokeObjectURL(localPreviewUrl.value)
+      localPreviewUrl.value = null
     }
   },
 )
@@ -52,18 +60,18 @@ function handleFileSelect(e: Event) {
   if (input.files && input.files.length > 0) {
     const file = input.files[0]
 
-    if (previewUrl.value) {
-      URL.revokeObjectURL(previewUrl.value)
+    if (localPreviewUrl.value) {
+      URL.revokeObjectURL(localPreviewUrl.value)
     }
-    previewUrl.value = URL.createObjectURL(file)
+    localPreviewUrl.value = URL.createObjectURL(file)
     emit('update:modelValue', file)
   }
   input.value = ''
 }
 
 onBeforeUnmount(() => {
-  if (previewUrl.value) {
-    URL.revokeObjectURL(previewUrl.value)
+  if (localPreviewUrl.value) {
+    URL.revokeObjectURL(localPreviewUrl.value)
   }
 })
 </script>

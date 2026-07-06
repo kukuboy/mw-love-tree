@@ -10,4 +10,5 @@ public class AuthResponse {
     private Long userId;
     private String nickname;
     private Long coupleId;
+    private String avatar;
 }

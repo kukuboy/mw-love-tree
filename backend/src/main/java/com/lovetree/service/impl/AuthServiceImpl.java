@@ -9,17 +9,32 @@ import com.lovetree.entity.User;
 import com.lovetree.mapper.CoupleMapper;
 import com.lovetree.mapper.UserMapper;
 import com.lovetree.service.AuthService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+
+    private static final Set<String> ALLOWED_EXTENSIONS = Set.of("jpg", "png", "gif", "webp");
 
     private final UserMapper userMapper;
     private final CoupleMapper coupleMapper;
     private final JwtUtil jwtUtil;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    @Value("${lovetree.upload.dir}")
+    private String uploadDir;
 
     public AuthServiceImpl(UserMapper userMapper, CoupleMapper coupleMapper, JwtUtil jwtUtil) {
         this.userMapper = userMapper;
@@ -48,7 +63,7 @@ public class AuthServiceImpl implements AuthService {
         // Generate JWT (coupleId = null on registration)
         String token = jwtUtil.generateToken(user.getId(), null);
 
-        return new AuthResponse(token, user.getId(), user.getNickname(), null);
+        return new AuthResponse(token, user.getId(), user.getNickname(), null, null);
     }
 
     @Override
@@ -73,6 +88,55 @@ public class AuthServiceImpl implements AuthService {
         // Generate JWT
         String token = jwtUtil.generateToken(user.getId(), coupleId);
 
-        return new AuthResponse(token, user.getId(), user.getNickname(), coupleId);
+        return new AuthResponse(token, user.getId(), user.getNickname(), coupleId, user.getAvatar());
+    }
+
+    @Override
+    @Transactional
+    public String uploadAvatar(Long userId, MultipartFile file) {
+        User user = userMapper.selectById(userId);
+        if (user == null) {
+            throw new BusinessException(404, "User not found");
+        }
+
+        String originalFilename = file.getOriginalFilename();
+        if (originalFilename == null || originalFilename.isEmpty()) {
+            throw new BusinessException(400, "File name is required");
+        }
+
+        int dotIndex = originalFilename.lastIndexOf('.');
+        if (dotIndex < 0) {
+            throw new BusinessException(400, "File must have an extension");
+        }
+
+        String extension = originalFilename.substring(dotIndex + 1).toLowerCase();
+        if (!ALLOWED_EXTENSIONS.contains(extension)) {
+            throw new BusinessException(400, "Invalid file extension. Allowed: jpg, png, gif, webp");
+        }
+
+        // Delete previous avatar file if it exists
+        if (user.getAvatar() != null && user.getAvatar().startsWith("/uploads/")) {
+            String oldFilename = user.getAvatar().replace("/uploads/", "");
+            try {
+                Files.deleteIfExists(Paths.get(uploadDir, oldFilename));
+            } catch (IOException ignored) {
+                // Best effort cleanup; ignore failure
+            }
+        }
+
+        String filename = UUID.randomUUID() + "." + extension;
+        Path targetPath = Paths.get(uploadDir, filename);
+
+        try {
+            Files.copy(file.getInputStream(), targetPath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new BusinessException(500, "Failed to save file");
+        }
+
+        String avatarUrl = "/uploads/" + filename;
+        user.setAvatar(avatarUrl);
+        userMapper.updateById(user);
+
+        return avatarUrl;
     }
 }
